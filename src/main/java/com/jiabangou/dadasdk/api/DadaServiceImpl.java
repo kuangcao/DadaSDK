@@ -42,6 +42,8 @@ public class DadaServiceImpl implements DadaService {
 
     protected HttpHost httpProxy;
 
+    protected DadaCallbackHandler dadaCallbackHandler;
+
     private int retrySleepMillis = 1000;
 
     private int maxRetryTimes = 5;
@@ -68,6 +70,10 @@ public class DadaServiceImpl implements DadaService {
 
     protected CloseableHttpClient getHttpclient() {
         return httpClient;
+    }
+
+    public void setDadaCallbackHandler(DadaCallbackHandler dadaCallbackHandler) {
+        this.dadaCallbackHandler = dadaCallbackHandler;
     }
 
     public void setDadaConfigStorage(DadaConfigStorage dadaConfigProvider) {
@@ -313,6 +319,12 @@ public class DadaServiceImpl implements DadaService {
         nvps.add(new BasicNameValuePair("token", signature.getToken()));
         nvps.add(new BasicNameValuePair("timestamp", String.valueOf(signature.getTimestamp())));
         nvps.add(new BasicNameValuePair("signature", signature.getSignature()));
+    }
+
+    public void orderCallback(DadaOrderCallbackMessage callbackMessage) {
+        if (this.dadaCallbackHandler != null) {
+            this.dadaCallbackHandler.handler(callbackMessage);
+        }
     }
 
     public DadaApiSignature createApiSignature() throws DadaErrorException {

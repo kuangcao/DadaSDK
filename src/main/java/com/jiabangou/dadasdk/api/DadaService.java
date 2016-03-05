@@ -158,6 +158,9 @@ public interface DadaService {
      */
     List<DadaCity> getCities() throws DadaErrorException;
 
+    void orderCallback(DadaOrderCallbackMessage callbackMessage);
+
     void setDadaConfigStorage(DadaConfigStorage dadaConfigProvider);
+    void setDadaCallbackHandler(DadaCallbackHandler dadaCallbackHandler);
     void setTest(boolean test);
 }
