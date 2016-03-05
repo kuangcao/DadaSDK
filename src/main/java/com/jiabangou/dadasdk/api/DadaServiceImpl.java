@@ -237,11 +237,11 @@ public class DadaServiceImpl implements DadaService {
         return DadaDmInfo.fromJson(resultContent);
     }
 
-    public List<DadaCancelReasonsResp> getCancelReasons() throws DadaErrorException {
+    public List<DadaCancelReason> getCancelReasons() throws DadaErrorException {
         String url = String.format("%s/v1_0/getCancelReasons/", getBaseUrl());
 
         String resultContent = doGet(url);
-        return DadaCancelReasonsResp.fromJson(resultContent);
+        return DadaCancelReason.fromJson(resultContent);
     }
 
     public long appointNewOrder(DadaAppointNewOrderReq appointNewOrderReq) throws DadaErrorException {
@@ -302,8 +302,10 @@ public class DadaServiceImpl implements DadaService {
         doPost(url, params);
     }
 
-    public void getCity() throws DadaErrorException {
-
+    public List<DadaCity> getCities() throws DadaErrorException {
+        String url = String.format("%s/v1_0/getCity/?token=%s", getBaseUrl(), getAccessToken());
+        String content = doGet(url);
+        return DadaCity.fromJson(content);
     }
 
     private void addSignature(List<NameValuePair> nvps) throws DadaErrorException {

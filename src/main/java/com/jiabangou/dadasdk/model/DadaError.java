@@ -38,7 +38,8 @@ public class DadaError extends DadaResp {
 
     public static DadaError fromJson(String json) {
         JSONObject jsonObject = JSON.parseObject(json);
-        if ("fail".equals(jsonObject.getString("status"))) {
+        String status = jsonObject.getString("status");
+        if (! "ok".equals(status)) {
             DadaError error = new DadaError();
             error.setErrorCode(jsonObject.getIntValue("errorCode"));
             error.setErrorMsg(ErrorCode.getMsg(error.getErrorCode()));

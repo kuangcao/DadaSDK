@@ -75,7 +75,15 @@ public interface DadaService {
      */
     DadaDmInfo getDmInfo(int dmId, String orderId) throws DadaErrorException;
 
-    List<DadaCancelReasonsResp> getCancelReasons() throws DadaErrorException;
+    /**
+     * <pre>
+     * 获取取消理由
+     * 详情请见: https://open.imdada.cn/wiki/getCancelReasons
+     * </pre>
+     * @return
+     * @throws DadaErrorException
+     */
+    List<DadaCancelReason> getCancelReasons() throws DadaErrorException;
 
     /**
      * <pre>
@@ -139,6 +147,16 @@ public interface DadaService {
      * @throws DadaErrorException
      */
     void updateTips(DadaUpdateTipsReq req) throws DadaErrorException;
+
+    /**
+     * <pre>
+     * 获取城市信息列表
+     * 详情请见: https://open.imdada.cn/wiki/cityList/
+     * </pre>
+     * @return
+     * @throws DadaErrorException
+     */
+    List<DadaCity> getCities() throws DadaErrorException;
 
     void setDadaConfigStorage(DadaConfigStorage dadaConfigProvider);
     void setTest(boolean test);

@@ -65,4 +65,9 @@ public class DadaServiceTest {
         System.out.println(dadaService.getCancelReasons());
     }
 
+    @Test
+    public void testGetCities() throws DadaErrorException {
+        System.out.println(dadaService.getCities());
+    }
+
 }

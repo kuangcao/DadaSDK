@@ -7,7 +7,7 @@ import com.alibaba.fastjson.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DadaCancelReasonsResp extends DadaResp {
+public class DadaCancelReason extends DadaResp {
     private long id;
     private String info;
 
@@ -29,19 +29,19 @@ public class DadaCancelReasonsResp extends DadaResp {
 
     @Override
     public String toString() {
-        return "DadaCancelReasonsResp{" +
+        return "DadaCancelReason{" +
                 "id=" + id +
                 ", info='" + info + '\'' +
                 '}';
     }
 
-    public static List<DadaCancelReasonsResp> fromJson(String json) {
+    public static List<DadaCancelReason> fromJson(String json) {
         JSONObject jsonObject = JSON.parseObject(json);
         JSONArray jsonArray = jsonObject.getJSONArray("result");
-        List<DadaCancelReasonsResp> list = new ArrayList<>();
+        List<DadaCancelReason> list = new ArrayList<>();
         for (Object object : jsonArray) {
             JSONObject jsonObject1 = (JSONObject)object;
-            DadaCancelReasonsResp resp = new DadaCancelReasonsResp();
+            DadaCancelReason resp = new DadaCancelReason();
             resp.setId(jsonObject1.getLongValue("id"));
             resp.setInfo(jsonObject1.getString("info"));
             list.add(resp);
