@@ -11,6 +11,20 @@ public class DadaCancelReason extends DadaResp {
     private long id;
     private String info;
 
+    public static List<DadaCancelReason> fromJson(String json) {
+        JSONObject jsonObject = JSON.parseObject(json);
+        JSONArray jsonArray = jsonObject.getJSONArray("result");
+        List<DadaCancelReason> list = new ArrayList<>();
+        for (Object object : jsonArray) {
+            JSONObject jsonObject1 = (JSONObject) object;
+            DadaCancelReason resp = new DadaCancelReason();
+            resp.setId(jsonObject1.getLongValue("id"));
+            resp.setInfo(jsonObject1.getString("info"));
+            list.add(resp);
+        }
+        return list;
+    }
+
     public long getId() {
         return id;
     }
@@ -33,20 +47,6 @@ public class DadaCancelReason extends DadaResp {
                 "id=" + id +
                 ", info='" + info + '\'' +
                 '}';
-    }
-
-    public static List<DadaCancelReason> fromJson(String json) {
-        JSONObject jsonObject = JSON.parseObject(json);
-        JSONArray jsonArray = jsonObject.getJSONArray("result");
-        List<DadaCancelReason> list = new ArrayList<>();
-        for (Object object : jsonArray) {
-            JSONObject jsonObject1 = (JSONObject)object;
-            DadaCancelReason resp = new DadaCancelReason();
-            resp.setId(jsonObject1.getLongValue("id"));
-            resp.setInfo(jsonObject1.getString("info"));
-            list.add(resp);
-        }
-        return list;
     }
 
 }
