@@ -26,6 +26,7 @@ public class DadaServiceImpl implements DadaService {
 
     private final static String BASE_URL = "http://public.imdada.cn";
     private final static String TEST_BASE_URL = "http://public.ga.qa.imdada.cn";
+    public static final String SIGNATURE_CONST = "dada";
     /**
      * 全局的是否正在刷新access token的锁
      */
@@ -319,7 +320,7 @@ public class DadaServiceImpl implements DadaService {
         final List<String> list = new ArrayList<String>(3);
         list.add(accssToken);
         list.add(String.valueOf(timestamp));
-        list.add("dada");
+        list.add(SIGNATURE_CONST);
         Collections.sort(list);
         StringBuilder stringBuilder = new StringBuilder();
         for (String str : list) {

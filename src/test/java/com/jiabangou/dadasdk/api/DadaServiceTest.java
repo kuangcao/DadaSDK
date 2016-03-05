@@ -30,8 +30,8 @@ public class DadaServiceTest {
         req.setCargo_price(20);
         req.setCargo_weight(1);
         req.setIs_prepay(0);
-        req.setCity_code("023");
-        req.setCity_name("重庆");
+        req.setCity_code("010");
+        req.setCity_name("北京");
         req.setDeliver_fee(20);
         req.setCargo_type(1);
         req.setExpected_fetch_time(0);
@@ -62,14 +62,7 @@ public class DadaServiceTest {
 
     @Test
     public void testGetCancelReasons() throws DadaErrorException {
-        System.out.println(JSON.parseObject("{'finish_code':'sdfs'}", DadaAddOrderResp.class,
-                new Feature[]{
-                        Feature.AllowUnQuotedFieldNames,
-                        Feature.SortFeidFastMatch,
-                        Feature.AllowSingleQuotes
-                }));
-//        System.out.println(DadaAddOrderResp.fromJson("{'finish_code':'sdfs'}"));
-        //        System.out.println(dadaService.getCancelReasons());
+        System.out.println(dadaService.getCancelReasons());
     }
 
 }
