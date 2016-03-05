@@ -72,6 +72,4 @@ public class DadaServiceTest {
         //        System.out.println(dadaService.getCancelReasons());
     }
 
-
-
 }

@@ -2,8 +2,6 @@ package com.jiabangou.dadasdk.api;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.google.common.base.Joiner;
-import com.google.common.collect.Lists;
 import com.jiabangou.dadasdk.exception.DadaErrorException;
 import com.jiabangou.dadasdk.model.*;
 import org.apache.commons.codec.digest.DigestUtils;
@@ -22,9 +20,7 @@ import org.apache.http.impl.client.*;
 import org.apache.http.message.BasicNameValuePair;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class DadaServiceImpl implements DadaService {
 
@@ -319,10 +315,18 @@ public class DadaServiceImpl implements DadaService {
     public DadaApiSignature createApiSignature() throws DadaErrorException {
         long timestamp = System.currentTimeMillis() / 1000;
         String accssToken = getAccessToken();
-        final List<String> list = Lists.newArrayList(accssToken, String.valueOf(timestamp), "data");
-        String sortedString = Joiner.on("").join(list);
+
+        final List<String> list = new ArrayList<String>(3);
+        list.add(accssToken);
+        list.add(String.valueOf(timestamp));
+        list.add("dada");
+        Collections.sort(list);
+        StringBuilder stringBuilder = new StringBuilder();
+        for (String str : list) {
+            stringBuilder.append(str);
+        }
         DadaApiSignature signature = new DadaApiSignature();
-        signature.setSignature(DigestUtils.md5Hex(sortedString));
+        signature.setSignature(DigestUtils.md5Hex(stringBuilder.toString()));
         signature.setTimestamp(timestamp);
         signature.setToken(accssToken);
         return signature;
