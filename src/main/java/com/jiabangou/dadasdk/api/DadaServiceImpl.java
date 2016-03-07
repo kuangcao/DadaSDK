@@ -321,9 +321,9 @@ public class DadaServiceImpl implements DadaService {
         nvps.add(new BasicNameValuePair("signature", signature.getSignature()));
     }
 
-    public void orderCallback(DadaOrderCallbackMessage callbackMessage) {
+    public void orderCallback(DadaOrderCallbackMessage callbackMessage, Map<String, Object> params) {
         if (this.dadaCallbackHandler != null) {
-            this.dadaCallbackHandler.handler(callbackMessage);
+            this.dadaCallbackHandler.handler(callbackMessage, params);
         }
     }
 

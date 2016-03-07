@@ -4,6 +4,7 @@ import com.jiabangou.dadasdk.exception.DadaErrorException;
 import com.jiabangou.dadasdk.model.*;
 
 import java.util.List;
+import java.util.Map;
 
 public interface DadaService {
 
@@ -158,7 +159,15 @@ public interface DadaService {
      */
     List<DadaCity> getCities() throws DadaErrorException;
 
-    void orderCallback(DadaOrderCallbackMessage callbackMessage);
+    /**
+     * <pre>
+     * 每次订单状态发生变化时，会对添加订单接口中callback的URL进行回调，任何状态变化都会有回调
+     * 详情请见: https://open.imdada.cn/wiki/callOrder/
+     * </pre>
+     * @param callbackMessage
+     * @param params 其他上下文携带参数
+     */
+    void orderCallback(DadaOrderCallbackMessage callbackMessage, Map<String, Object> params);
 
     void setDadaConfigStorage(DadaConfigStorage dadaConfigProvider);
     void setDadaCallbackHandler(DadaCallbackHandler dadaCallbackHandler);
