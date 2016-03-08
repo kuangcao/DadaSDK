@@ -17,7 +17,7 @@ public class DadaServiceTest {
         dadaService = new DadaServiceImpl();
         dadaService.setTest(true);
         DadaInMemoryConfigStorage configStorage = new DadaInMemoryConfigStorage();
-        configStorage.setAppKey("dadaf056c2b471192111");
+        configStorage.setAppKey("xxxx");
         dadaService.setDadaConfigStorage(configStorage);
         String accessToken = dadaService.getAccessToken();
     }
