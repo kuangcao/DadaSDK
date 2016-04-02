@@ -217,29 +217,22 @@ public class DadaServiceImpl implements DadaService {
         } else {
             url = String.format("%s/v2_0/cancelOrder/", getBaseUrl());
         }
-        List<NameValuePair> params= toNameValuePairs(req);
-        addSignature(params);
-        String resultContent = doPost(url, params);
+        String requestUrl = url + buildCommonGetParameter() + "&order_id=" + req.getOrder_id() + "&reason=" + req.getCancel_reason();
+        final String resultContent = doGet(requestUrl);
         return DadaCancelOrderResp.fromJson(resultContent);
     }
 
     public DadaOrderInfoResp getOrderInfo(String orderId) throws DadaErrorException {
         String url = String.format("%s/v1_0/getOrderInfo/", getBaseUrl());
-        List<NameValuePair> nvps = new ArrayList<NameValuePair>();
-        addSignature(nvps);
-        nvps.add(new BasicNameValuePair("order_id", orderId));
-        String resultContent = doPost(url, nvps);
+        String requestUrl = url + buildCommonGetParameter() + "&order_id=" + orderId;
+        final String resultContent = doGet(requestUrl);
         return DadaOrderInfoResp.fromJson(resultContent);
     }
 
     public DadaDmInfo getDmInfo(int dmId, String orderId) throws DadaErrorException {
         String url = String.format("%s/v1_0/getDmInfo/", getBaseUrl());
-        List<NameValuePair> nvps = new ArrayList<NameValuePair>();
-        addSignature(nvps);
-        nvps.add(new BasicNameValuePair("dm_id", String.valueOf(dmId)));
-        nvps.add(new BasicNameValuePair("order_id", String.valueOf(orderId)));
-
-        String resultContent = doPost(url, nvps);
+        String requestUrl = url + buildCommonGetParameter() + "&order_id=" + orderId + "&dm_id=" + dmId;
+        final String resultContent = doGet(requestUrl);
         return DadaDmInfo.fromJson(resultContent);
     }
 
@@ -260,43 +253,41 @@ public class DadaServiceImpl implements DadaService {
         return jsonObject.getLongValue("orderid");
     }
 
+    private String buildCommonGetParameter() throws DadaErrorException {
+        final DadaApiSignature apiSignature = createApiSignature();
+        String format = String.format("?token=%s&timestamp=%s&signature=%s");
+        return String.format(format, apiSignature.getToken(), apiSignature.getTimestamp(), apiSignature.getSignature());
+    }
+
     public void acceptOrder(String orderId) throws DadaErrorException {
         if (isTest) {
             String url = String.format("%s/v1_0/acceptOrder/", getBaseUrl());
-            List<NameValuePair> params = new ArrayList<NameValuePair>();
-            addSignature(params);
-            params.add(new BasicNameValuePair("order_id", orderId));
-            doPost(url, params);
+            String requestUrl = url + buildCommonGetParameter() + "&order_id=" + orderId;
+            doGet(requestUrl);
         }
     }
 
     public void rejectOrder(String orderId) throws DadaErrorException {
         if (isTest) {
             String url = String.format("%s/v1_0/rejectOrder/", getBaseUrl());
-            List<NameValuePair> params = new ArrayList<NameValuePair>();
-            addSignature(params);
-            params.add(new BasicNameValuePair("order_id", orderId));
-            doPost(url, params);
+            String requestUrl = url + buildCommonGetParameter() + "&order_id=" + orderId;
+            doGet(requestUrl);
         }
     }
 
     public void fetchOrder(String orderId) throws DadaErrorException {
         if (isTest) {
             String url = String.format("%s/v1_0/fetchOrder/", getBaseUrl());
-            List<NameValuePair> params = new ArrayList<NameValuePair>();
-            addSignature(params);
-            params.add(new BasicNameValuePair("order_id", orderId));
-            doPost(url, params);
+            String requestUrl = url + buildCommonGetParameter() + "&order_id=" + orderId;
+            doGet(requestUrl);
         }
     }
 
     public void finishOrder(String orderId) throws DadaErrorException {
         if (isTest) {
             String url = String.format("%s/v1_0/finishOrder/", getBaseUrl());
-            List<NameValuePair> params = new ArrayList<NameValuePair>();
-            addSignature(params);
-            params.add(new BasicNameValuePair("order_id", orderId));
-            doPost(url, params);
+            String requestUrl = url + buildCommonGetParameter() + "&order_id=" + orderId;
+            doGet(requestUrl);
         }
     }
 
