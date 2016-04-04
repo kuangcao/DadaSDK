@@ -255,8 +255,7 @@ public class DadaServiceImpl implements DadaService {
 
     private String buildCommonGetParameter() throws DadaErrorException {
         final DadaApiSignature apiSignature = createApiSignature();
-        String format = String.format("?token=%s&timestamp=%s&signature=%s");
-        return String.format(format, apiSignature.getToken(), apiSignature.getTimestamp(), apiSignature.getSignature());
+        return String.format("?token=%s&timestamp=%s&signature=%s", apiSignature.getToken(), apiSignature.getTimestamp(), apiSignature.getSignature());
     }
 
     public void acceptOrder(String orderId) throws DadaErrorException {
