@@ -6,7 +6,7 @@
 
     <groupId>com.jiabangou</groupId>
     <artifactId>dada-sdk</artifactId>
-    <version>0.2-SNAPSHOT</version>
+    <version>0.2.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>Dada Express SDK</name>
@@ -97,14 +97,14 @@
         </repository>-->
 
         <snapshotRepository>
-            <id>jbg</id>
+            <id>jiabangou-snapshot</id>
             <name>meicanyun Snapshot</name>
             <url>http://112.74.39.40:8081/nexus/content/repositories/snapshots/</url>
             <uniqueVersion>true</uniqueVersion>
         </snapshotRepository>
 
         <repository>
-            <id>jbg</id>
+            <id>jiabangou-release</id>
             <name>meicanyun Release</name>
             <url>http://112.74.39.40:8081/nexus/content/repositories/releases/</url>
         </repository>
