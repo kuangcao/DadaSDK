@@ -163,7 +163,7 @@ public class DadaServiceImpl implements DadaService {
                 RequestConfig config = RequestConfig.custom().setProxy(httpProxy).build();
                 httpPost.setConfig(config);
             }
-            httpPost.setEntity(new UrlEncodedFormEntity(nvps));
+            httpPost.setEntity(new UrlEncodedFormEntity(nvps, "UTF-8"));
             CloseableHttpResponse response = getHttpclient().execute(httpPost);
             String resultContent = new BasicResponseHandler().handleResponse(response);
             DadaError error = DadaError.fromJson(resultContent);
